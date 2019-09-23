@@ -1,0 +1,44 @@
+dist: trusty
+language: java
+sudo: false
+jdk: oraclejdk8
+script: javac src/main/java/DisplayOutput.java
+before_install:
+ # ensure we are using the correct version of gradle
+  - wget https://services.gradle.org/distributions/gradle-4.9-bin.zip
+  - unzip -d $HOME gradle-4.9-bin.zip
+  # probably don't need this but just to be sure
+  - rm -rf gradle-4.9-bin.zip
+  # add gradle bin to path at the beginning to ensure it overwrites old gradle
+  - export PATH="$HOME/gradle-4.9/bin:$PATH"
+  # install mdl for markdown linting
+  - gem install mdl
+  # switch to python 3.6.3 globally, install python deps
+  - pyenv global 3.6.3
+  - pip install --upgrade pip
+  - pip install proselint
+  - pip install pipenv
+
+# cache to improve build speed
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.pip-cache/
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+# delete old gatorgrader for clean slate
+before_script:
+  - rm -rf $HOME/.local/share/gatorgrader/
+
+# run grading checks
+script:
+  - gradle --version
+  - gradle clean
+  - gradle check
+  - gradle build
+  - gradle run
+  - gradle grade -x build

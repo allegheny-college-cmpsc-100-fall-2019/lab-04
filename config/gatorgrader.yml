@@ -1,0 +1,35 @@
+---
+name: lab-04
+break: true
+indent: 4
+---
+src/main:
+    java:
+        cipher/DisplayCipher.java:
+            ConfirmFileExists
+            CountSingleLineComments --language Java --count 3
+            CountMultipleLineComments --language Java --count 3
+            MatchFileFragment --fragment "TODO" --count 0 --exact
+            MatchFileFragment --fragment "{YOUR NAME HERE}" --count 0 --exact
+            MatchFileFragment --fragment "charAt" --count 1
+            MatchFileFragment --fragment "String encipheredWord" --count 1
+            MatchFileFragment --fragment "\n" --count 1 --exact
+            MatchFileFragment --fragment "+=" --count 1
+            MatchFileFragment --fragment "public static int newCharValue" --count 1 --exact
+            MatchFileFragment --fragment "return" --count 1 --exact
+            MatchFileFragment --fragment "System.out.println" --count 0 --exact
+            MatchFileRegex --regex "\(char\)newCharValue\(originalWord.charAt\([0-9]\),cipherDistance\);" --count 1
+            MatchFileRegex --regex "\bSystem.out.print\b" --count 1 --exact
+            
+writing:
+    reflection.md:
+        ConfirmFileExists
+        CountFileWords --count 300
+        CountMarkdownTags --tag "heading" --count 6
+        CountMarkdownTags --tag "code_block" --count 1
+        CountMarkdownTags --tag "list" --count 1
+        MatchFileFragment --fragment "TODO" --count 0 --exact
+        
+CountCommits --count 3
+ExecuteCommand --command "gradle build"
+MatchCommandRegex --command "gradle run" --regex "Geiwev%" --count 1 --exact
