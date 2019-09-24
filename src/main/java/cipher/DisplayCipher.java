@@ -30,14 +30,14 @@ public class DisplayCipher {
     int cipherDistance = Integer.parseInt(scanner.nextLine());
     /*
      * TODO Implement the newCharValue method with the charAt method
-     * of String to turn get a letter and pass it to newCharValue
+     * of String to get a letter and pass it to newCharValue,
      * casting the result as a char. How can you concatenate the
      * encipherWord string? How many separate statements do you
      * need to provide?
      */
-    String encipherWord = new String();
+    String encipheredWord = new String();
     /* 
-     * TODO Print originalWord and encipher word on two lines using
+     * TODO Print originalWord and encipheredWord on two lines using
      * only one print statement.
      */
   }
